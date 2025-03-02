@@ -11,7 +11,11 @@ async function pollBlock(blockNumber: number) {
         // topics will get all the indexed with it's provided input
         topics: [id("Transfer(address,address,uint256)")]
     })
+
+    // instead of consoling, put it to your data base
     console.log(logs);
 }
 
 pollBlock(21495003);
+
+// we can do something like calling this function infinitely to store the data of every blocks in Eth in our DB and then access them faster but doing it from the 1st blockNumber is not feasible so do it from when your DApp is deployed
