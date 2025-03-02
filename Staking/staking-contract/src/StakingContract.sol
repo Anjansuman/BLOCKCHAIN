@@ -11,13 +11,20 @@ contract StakingContract is Ownable {
 
     }
 
-    function stake(uint _amount) public {
-        balances[msg.sender] += _amount;
-        totalStakedAmount += _amount;
+    function totalStaked() public view returns(uint) {
+        return totalStakedAmount;
     }
 
-    function unStake(uint _amount) public {
+    function stake(uint _amount) public payable {
+        require(msg.value == _amount);
+        require(msg.value > 0);
+        balances[msg.sender] += msg.value;
+        totalStakedAmount += msg.value;
+    }
+
+    function unstake(uint _amount) public {
         require(balances[msg.sender] >= _amount, "Not enough balance!");
+        payable(address(msg.sender)).transfer(_amount / 2);
         balances[msg.sender] -= _amount;
         totalStakedAmount -= _amount;
     }
