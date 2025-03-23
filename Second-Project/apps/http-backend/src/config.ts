@@ -1,0 +1,1 @@
+export const MNEMONICS = "myself me whoever key tell professional configuration package drive swim aircraft leg";
